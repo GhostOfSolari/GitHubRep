@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements RouterInterface.M
     }
 
     public void btnSearchClick(View v) {
+        
         if (pbProcess.getVisibility() == View.INVISIBLE) {
             pbProcess.setVisibility(View.VISIBLE);
             btnSearch.setText(R.string.cancel);
