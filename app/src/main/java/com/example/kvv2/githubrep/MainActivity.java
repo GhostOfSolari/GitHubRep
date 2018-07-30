@@ -44,16 +44,17 @@ public class MainActivity extends AppCompatActivity implements RouterInterface.M
             mPresenter.getData("" + etSearchText.getText());
         } else {
             btnSearch.setText(R.string.search);
+            pbProcess.setVisibility(View.INVISIBLE);
             mPresenter.Cancel();
         }
     }
 
     @Override
-    public void viewData(List<Repository> listData) {
+    public void viewData(List<Repository> listData, boolean isSuccessful) {
         btnSearch.setText(R.string.search);
         pbProcess.setVisibility(View.INVISIBLE);
 
-        if ((listData == null)) return;
+        if (!isSuccessful || (listData == null)) return;
 
         ArrayAdapter<Repository> adapter = new ArrayAdapter<Repository>(this,
                 android.R.layout.simple_list_item_1, listData);

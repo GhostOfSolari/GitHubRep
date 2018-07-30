@@ -1,5 +1,7 @@
 package com.example.kvv2.githubrep;
 
+import android.util.Log;
+
 import com.example.kvv2.githubrep.StorageFiles.Tables.Repository;
 import com.example.kvv2.githubrep.interfaces.RouterInterface;
 
@@ -15,8 +17,8 @@ import retrofit2.http.Query;
 
 public class GitSearcher implements RouterInterface.GitSearcherInterface {
 
+    private final static String LOG_TAG = "myLogs";
     private RouterInterface.MainViewPresenterInterface mPresenter;
-
 
     private class Message {
 
@@ -55,16 +57,13 @@ public class GitSearcher implements RouterInterface.GitSearcherInterface {
         messages.enqueue(new Callback<Message>() {
             @Override
             public void onResponse(Call<Message> call, Response<Message> response) {
-                if (response.isSuccessful()) {
-                    mPresenter.gitSearcherCallBack((List<Repository>)response.body().items);
-                } else {
-
-                }
+                    mPresenter.gitSearcherCallBack((List<Repository>)response.body().items, response.isSuccessful());
             }
 
             @Override
             public void onFailure(Call<Message> call, Throwable t) {
-
+                Log.d(LOG_TAG, t.getMessage());
+                mPresenter.gitSearcherCallBack(null, false);
             }
         });
     }

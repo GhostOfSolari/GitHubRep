@@ -8,13 +8,13 @@ public interface RouterInterface {
 
     interface MainViewInterface {
 
-        void viewData(List<Repository> listData);
+        void viewData(List<Repository> listData, boolean isSuccessful);
     }
 
     interface MainViewPresenterInterface {
 
         void getData(String s);
-        void gitSearcherCallBack(List<Repository> listData);
+        void gitSearcherCallBack(List<Repository> listData, boolean isSuccessful);
         void Cancel();
     }
 

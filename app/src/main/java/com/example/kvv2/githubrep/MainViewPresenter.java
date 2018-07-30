@@ -9,7 +9,6 @@ import java.util.List;
 
 public class MainViewPresenter implements RouterInterface.MainViewPresenterInterface {
 
-    final String LOG_TAG = "myLogs";
 
     private RouterInterface.MainViewInterface mView;
     private RouterInterface.GitSearcherInterface mSearcher;
@@ -25,7 +24,7 @@ public class MainViewPresenter implements RouterInterface.MainViewPresenterInter
     public void Cancel() {
         isCanceled = true;
         mLastText = "";
-        mView.viewData(null);
+        //mView.viewData(null);
     }
 
     @Override
@@ -33,30 +32,30 @@ public class MainViewPresenter implements RouterInterface.MainViewPresenterInter
         isCanceled = false;
 
         if (!s.trim().equals(mLastText.trim())) {
-            Log.d(LOG_TAG, "SEARCH...");
+            Log.d(String.valueOf(R.string.log_tag), "SEARCH...");
             mLastText = s;
             mSearcher.search(s);
         } else {
-            Log.d(LOG_TAG, "FROM DB...");
+            Log.d(String.valueOf(R.string.log_tag), "FROM DB...");
             StorageApplication.getInstance().getData(onGetData);
         }
     }
 
     @Override
-    public void gitSearcherCallBack(List<Repository> listData) {
+    public void gitSearcherCallBack(List<Repository> listData, boolean isSuccessful) {
         if (isCanceled) return;
 
-        if (listData.size() > 0)
+        if (!isCanceled && listData.size() > 0)
             StorageApplication.getInstance().saveData(listData);
 
-        mView.viewData(listData);
+        mView.viewData(listData, isSuccessful);
     }
 
     private RouterInterface.DBStorageInterface.OnGetData onGetData = new RouterInterface.DBStorageInterface.OnGetData() {
         @Override
         public void callBack(List<Repository> listData) {
             if (isCanceled) return;
-            mView.viewData(listData);
+            mView.viewData(listData, true);
         }
     };
 }

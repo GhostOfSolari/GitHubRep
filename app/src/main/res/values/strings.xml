@@ -2,4 +2,5 @@
     <string name="app_name">GitHubRep</string>
     <string name="search">Search</string>
     <string name="cancel">Cancel</string>
+    <string name="log_tag">myLogs</string>
 </resources>
