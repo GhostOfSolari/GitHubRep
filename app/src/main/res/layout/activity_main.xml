@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="btnSearchClick"
-            android:text="Search repository" />
+            android:text="Search" />
 
         <ProgressBar
             android:id="@+id/pbProcess"
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            tools:visibility="invisible" />
+            tools:visibility="visible" />
     </LinearLayout>
 
     <ListView

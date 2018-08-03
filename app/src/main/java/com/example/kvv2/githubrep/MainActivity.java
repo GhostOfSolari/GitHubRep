@@ -9,7 +9,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
-import com.example.kvv2.githubrep.StorageFiles.Tables.Repository;
+import com.example.kvv2.githubrep.Factory.PresenterFactory;
+import com.example.kvv2.githubrep.StorageFiles.Tables.GitRepositoryTBL;
 import com.example.kvv2.githubrep.interfaces.RouterInterface;
 
 import java.util.List;
@@ -27,7 +28,8 @@ public class MainActivity extends AppCompatActivity implements RouterInterface.M
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mPresenter = new MainViewPresenter(this);
+        mPresenter = PresenterFactory.GetPresenter(this);
+
         lvMain = (ListView) findViewById(R.id.lvMain);
         pbProcess = (ProgressBar) findViewById(R.id.pbProcess);
         etSearchText = (EditText) findViewById(R.id.etSearchText);
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements RouterInterface.M
             pbProcess.setVisibility(View.VISIBLE);
             btnSearch.setText(R.string.cancel);
             lvMain.setAdapter(null);
-            mPresenter.getData("" + etSearchText.getText());
+            mPresenter.getData("" + etSearchText.getText(), onGetData);
         } else {
             btnSearch.setText(R.string.search);
             pbProcess.setVisibility(View.INVISIBLE);
@@ -49,14 +51,20 @@ public class MainActivity extends AppCompatActivity implements RouterInterface.M
         }
     }
 
-    @Override
-    public void viewData(List<Repository> listData, boolean isSuccessful) {
+    private RouterInterface.OnGetData onGetData = new RouterInterface.OnGetData() {
+        @Override
+        public void callBack(List<GitRepositoryTBL> listData, boolean isSuccessful) {
+            viewData(listData, isSuccessful);
+        }
+    };
+
+    public void viewData(List<GitRepositoryTBL> listData, boolean isSuccessful) {
         btnSearch.setText(R.string.search);
         pbProcess.setVisibility(View.INVISIBLE);
 
         if (!isSuccessful || (listData == null)) return;
 
-        ArrayAdapter<Repository> adapter = new ArrayAdapter<Repository>(this,
+        ArrayAdapter<GitRepositoryTBL> adapter = new ArrayAdapter<GitRepositoryTBL>(this,
                 android.R.layout.simple_list_item_1, listData);
 
         lvMain.setAdapter(adapter);

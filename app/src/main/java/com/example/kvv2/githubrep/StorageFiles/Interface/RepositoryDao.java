@@ -4,19 +4,19 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
-import com.example.kvv2.githubrep.StorageFiles.Tables.Repository;
+import com.example.kvv2.githubrep.StorageFiles.Tables.GitRepositoryTBL;
 
 import java.util.List;
 
 @Dao
 public interface RepositoryDao {
 
-    @Query("SELECT * FROM repository")
-    List<Repository> getAll();
+    @Query("SELECT * FROM GitRepositoryTBL")
+    List<GitRepositoryTBL> getAll();
 
     @Insert
-    void insert(List<Repository> repository);
+    void insert(List<GitRepositoryTBL> repository);
 
-    @Query("DELETE FROM repository")
+    @Query("DELETE FROM GitRepositoryTBL")
     void deleteAll();
 }

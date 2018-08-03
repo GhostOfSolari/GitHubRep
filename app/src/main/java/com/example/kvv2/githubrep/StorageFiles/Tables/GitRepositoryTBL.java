@@ -4,11 +4,13 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity
-public class Repository {
+@Entity(tableName = "GitRepositoryTBL")
+public class GitRepositoryTBL {
 
     @PrimaryKey(autoGenerate = true)
-    public long id;
+    public long kod;
+
+    //public long id;
 
     public String full_name;
 

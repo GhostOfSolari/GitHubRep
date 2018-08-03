@@ -1,8 +1,8 @@
-package com.example.kvv2.githubrep;
+package com.example.kvv2.githubrep.StorageFiles;
 
 import android.util.Log;
 
-import com.example.kvv2.githubrep.StorageFiles.Tables.Repository;
+import com.example.kvv2.githubrep.StorageFiles.Tables.GitRepositoryTBL;
 import com.example.kvv2.githubrep.interfaces.RouterInterface;
 
 import java.util.List;
@@ -15,16 +15,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public class GitSearcher implements RouterInterface.GitSearcherInterface {
+public class RemoteStorage implements RouterInterface.RemoteStorageInterface {
 
     private final static String LOG_TAG = "myLogs";
-    private RouterInterface.MainViewPresenterInterface mPresenter;
+    private RouterInterface.OnGetData onEnqueue;
 
     private class Message {
 
         private String total_count;
         private boolean incomplete_results;
-        private List<Repository> items;
+        private List<GitRepositoryTBL> items;
     }
 
     private interface MessagesApi {
@@ -37,12 +37,9 @@ public class GitSearcher implements RouterInterface.GitSearcherInterface {
         Call<Message> messages(@Query("q") String q);
     }
 
-    public GitSearcher(RouterInterface.MainViewPresenterInterface aPresenter) {
-        this.mPresenter = aPresenter;
-    }
-
     @Override
-    public void search(String s) {
+    public void getData(String s, RouterInterface.OnGetData onGetData) {
+        this.onEnqueue = onGetData;
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.github.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -57,13 +54,13 @@ public class GitSearcher implements RouterInterface.GitSearcherInterface {
         messages.enqueue(new Callback<Message>() {
             @Override
             public void onResponse(Call<Message> call, Response<Message> response) {
-                    mPresenter.gitSearcherCallBack((List<Repository>)response.body().items, response.isSuccessful());
+                onEnqueue.callBack(response.body().items, response.isSuccessful());
             }
 
             @Override
             public void onFailure(Call<Message> call, Throwable t) {
                 Log.d(LOG_TAG, t.getMessage());
-                mPresenter.gitSearcherCallBack(null, false);
+                onEnqueue.callBack(null, false);
             }
         });
     }

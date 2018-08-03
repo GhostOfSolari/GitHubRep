@@ -1,6 +1,6 @@
 package com.example.kvv2.githubrep.interfaces;
 
-import com.example.kvv2.githubrep.StorageFiles.Tables.Repository;
+import com.example.kvv2.githubrep.StorageFiles.Tables.GitRepositoryTBL;
 
 import java.util.List;
 
@@ -8,31 +8,29 @@ public interface RouterInterface {
 
     interface MainViewInterface {
 
-        void viewData(List<Repository> listData, boolean isSuccessful);
+    }
+
+    interface OnGetData {
+        void callBack(List<GitRepositoryTBL> listData, boolean isSuccessful);
     }
 
     interface MainViewPresenterInterface {
 
-        void getData(String s);
-        void gitSearcherCallBack(List<Repository> listData, boolean isSuccessful);
+        void getData(String s, OnGetData onGetData);
         void Cancel();
     }
 
-    interface DBStorageInterface {
-
-        interface OnGetData {
-            void callBack(List<Repository> listData);
-        }
-
-        interface StorageInterface {
-
-            void saveData(List<Repository> listData);
-            void getData(RouterInterface.DBStorageInterface.OnGetData onGetData);
-        }
+    interface RepositoryInterface {
+        void getData(String s, OnGetData onGetData);
     }
 
-    interface GitSearcherInterface {
+    interface RemoteStorageInterface {
+        void getData(String s, OnGetData onGetData);
+    }
 
-        void search(String s);
+    interface LocalStorageInterface {
+
+        void saveData(List<GitRepositoryTBL> listData);
+        void getData(OnGetData onGetData);
     }
 }

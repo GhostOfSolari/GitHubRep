@@ -4,9 +4,9 @@ import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
 
 import com.example.kvv2.githubrep.StorageFiles.Interface.RepositoryDao;
-import com.example.kvv2.githubrep.StorageFiles.Tables.Repository;
+import com.example.kvv2.githubrep.StorageFiles.Tables.GitRepositoryTBL;
 
-@Database(entities = {Repository.class}, version = 1)
+@Database(entities = {GitRepositoryTBL.class}, version = 1)
 public abstract class StorageDB extends RoomDatabase {
     public abstract RepositoryDao employeeDao();
 }
