@@ -1,7 +1,7 @@
-package com.example.kvv2.githubrep;
+package com.example.kvv2.githubrep.presenter;
 
-import com.example.kvv2.githubrep.StorageFiles.Tables.GitRepositoryTBL;
-import com.example.kvv2.githubrep.interfaces.RouterInterface;
+import com.example.kvv2.githubrep.RouterInterface;
+import com.example.kvv2.githubrep.model.tables.GitRepositoryTBL;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class MainViewPresenter implements RouterInterface.MainViewPresenterInter
     }
 
     @Override
-    public void Cancel() {
+    public void cancel() {
         isCanceled = true;
     }
 

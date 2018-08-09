@@ -1,4 +1,4 @@
-package com.example.kvv2.githubrep;
+package com.example.kvv2.githubrep.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,9 +9,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
-import com.example.kvv2.githubrep.Factory.PresenterFactory;
-import com.example.kvv2.githubrep.StorageFiles.Tables.GitRepositoryTBL;
-import com.example.kvv2.githubrep.interfaces.RouterInterface;
+import com.example.kvv2.githubrep.presenter.PresenterFactory;
+import com.example.kvv2.githubrep.R;
+import com.example.kvv2.githubrep.model.tables.GitRepositoryTBL;
+import com.example.kvv2.githubrep.RouterInterface;
 
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements RouterInterface.M
         } else {
             btnSearch.setText(R.string.search);
             pbProcess.setVisibility(View.INVISIBLE);
-            mPresenter.Cancel();
+            mPresenter.cancel();
         }
     }
 

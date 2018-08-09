@@ -1,20 +1,21 @@
-package com.example.kvv2.githubrep.StorageFiles;
+package com.example.kvv2.githubrep.model;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.example.kvv2.githubrep.StorageFiles.Tables.GitRepositoryTBL;
-import com.example.kvv2.githubrep.interfaces.RouterInterface;
+import com.example.kvv2.githubrep.RouterInterface;
+import com.example.kvv2.githubrep.model.db.StorageDB;
+import com.example.kvv2.githubrep.model.tables.GitRepositoryTBL;
 
 import java.util.List;
 
-public class LocalStorage implements RouterInterface.LocalStorageInterface {
+public class LocalRepository implements RouterInterface.LocalRepositoryInterface {
 
     private StorageDB database;
     private RouterInterface.OnGetData onGetData;
 
-    public LocalStorage(Context context) {
+    public LocalRepository(Context context) {
         database = Room.databaseBuilder(context, StorageDB.class, "GitRepDB").build();
     }
 

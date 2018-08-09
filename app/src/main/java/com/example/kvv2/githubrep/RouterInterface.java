@@ -1,6 +1,6 @@
-package com.example.kvv2.githubrep.interfaces;
+package com.example.kvv2.githubrep;
 
-import com.example.kvv2.githubrep.StorageFiles.Tables.GitRepositoryTBL;
+import com.example.kvv2.githubrep.model.tables.GitRepositoryTBL;
 
 import java.util.List;
 
@@ -17,18 +17,18 @@ public interface RouterInterface {
     interface MainViewPresenterInterface {
 
         void getData(String s, OnGetData onGetData);
-        void Cancel();
+        void cancel();
     }
 
     interface RepositoryInterface {
         void getData(String s, OnGetData onGetData);
     }
 
-    interface RemoteStorageInterface {
+    interface RemoteRepositoryInterface {
         void getData(String s, OnGetData onGetData);
     }
 
-    interface LocalStorageInterface {
+    interface LocalRepositoryInterface {
 
         void saveData(List<GitRepositoryTBL> listData);
         void getData(OnGetData onGetData);

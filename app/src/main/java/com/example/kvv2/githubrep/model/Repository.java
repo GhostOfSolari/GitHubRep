@@ -1,24 +1,20 @@
-package com.example.kvv2.githubrep;
+package com.example.kvv2.githubrep.model;
 
-import android.content.Context;
-
-import com.example.kvv2.githubrep.StorageFiles.LocalStorage;
-import com.example.kvv2.githubrep.StorageFiles.RemoteStorage;
-import com.example.kvv2.githubrep.StorageFiles.Tables.GitRepositoryTBL;
-import com.example.kvv2.githubrep.interfaces.RouterInterface;
+import com.example.kvv2.githubrep.RouterInterface;
+import com.example.kvv2.githubrep.model.tables.GitRepositoryTBL;
 
 import java.util.List;
 
 public class Repository implements RouterInterface.RepositoryInterface {
 
-    private RouterInterface.RemoteStorageInterface mRemoteStorage;
-    private RouterInterface.LocalStorageInterface mLocalStorage;
+    private RouterInterface.RemoteRepositoryInterface mRemoteStorage;
+    private RouterInterface.LocalRepositoryInterface mLocalStorage;
     private RouterInterface.OnGetData onGetData;
     private String mLastText = "";
 
-    public Repository(Context context) {
-        mRemoteStorage = new RemoteStorage();
-        mLocalStorage = new LocalStorage(context);
+    public Repository(RouterInterface.LocalRepositoryInterface localStorage, RouterInterface.RemoteRepositoryInterface remoteStorage) {
+        mRemoteStorage = remoteStorage;
+        mLocalStorage = localStorage;
     }
 
     @Override

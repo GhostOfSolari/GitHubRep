@@ -1,4 +1,4 @@
-package com.example.kvv2.githubrep.StorageFiles.Tables;
+package com.example.kvv2.githubrep.model.tables;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;

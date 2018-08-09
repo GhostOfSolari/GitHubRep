@@ -1,9 +1,9 @@
-package com.example.kvv2.githubrep.StorageFiles;
+package com.example.kvv2.githubrep.model;
 
 import android.util.Log;
 
-import com.example.kvv2.githubrep.StorageFiles.Tables.GitRepositoryTBL;
-import com.example.kvv2.githubrep.interfaces.RouterInterface;
+import com.example.kvv2.githubrep.RouterInterface;
+import com.example.kvv2.githubrep.model.tables.GitRepositoryTBL;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public class RemoteStorage implements RouterInterface.RemoteStorageInterface {
+public class RemoteRepository implements RouterInterface.RemoteRepositoryInterface {
 
     private final static String LOG_TAG = "myLogs";
     private RouterInterface.OnGetData onEnqueue;
